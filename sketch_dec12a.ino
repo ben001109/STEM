@@ -7,7 +7,6 @@
 void formatMacAddress(const uint8_t *macAddr, char *buffer, int maxLength);
 void receiveCallback(const uint8_t *macAddr, const uint8_t *data, int dataLen);
 void sentCallback(const uint8_t *macAddr, esp_now_send_status_t status);
-void sentCallback(const uint8_t *macAddr, esp_now_send_status_t status);
 void broadcast(const String &message);
 
 // 環境建置(代碼庫關聯(GPS))
@@ -18,11 +17,7 @@ bool buttonDown = false;
 bool ledOn = false;
 
 // 定義LED和按鍵引脚，根据自己的開發版原理圖修改
-#ifdef ESP32C3
-  // 配合esp32C3
-  #define STATUS_LED 12
-  #define STATUS_BUTTON 9
-#elif ESP32
+#ifdef ESP32
   // 配合esp32
   #define STATUS_LED 2
   #define STATUS_BUTTON 0
@@ -152,7 +147,7 @@ void updateSerial()
   }
 }
 
-//顯示目前GPS迴船資料
+//顯示目前GPS迴傳資料
 void displayInfo()
 {
   Serial.print(F("Location: "));
