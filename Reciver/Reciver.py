@@ -14,19 +14,24 @@ lora = LoRaRcvCont(verbose=False)
 lora.set_mode(MODE.SLEEP)
 lora.set_dio_mapping([0] * 6)
 
+
 def on_receive(payload):
     global lora_data
     lora_data = payload
     print("Received data:", payload)
 
+
 lora.on_rx_done = on_receive
+
 
 def start_lora():
     lora.set_mode(MODE.RXCONT)
 
+
 @app.route('/get-lora-data')
 def get_lora_data():
     return jsonify(lora_data)
+
 
 if __name__ == '__main__':
     threading.Thread(target=start_lora).start()
